@@ -17,13 +17,18 @@
       <li>
         <input type="button" class="done" onclick="markDone(this.parentNode)" value="&#x2713;" />
         <input type="button" class="remove" onclick="remove(this.parentNode)" value="&#x2715;" />
+        <input type="button" class="important" onclick="important(this.parentNode)" value="!" />
         make todo list
       </li>
     </ul>
     <hr>
 
     <!-- STEPs 8 and 9 below here  -->
+    <div id="divabout">
 
+    </div>
+    <input type="button" name="about" value="About" onclick="doAbout()">
     <!-- STEP 13 below here  -->
+    <input type="button" name="clear" value="Clear" onclick="clearAbout()">
   </body>
 </html>

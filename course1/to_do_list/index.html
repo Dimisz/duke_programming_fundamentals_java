@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>To-Dos</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <h1 id="myHeader">TO DO List</h1>
+    <input type="button" id="addButton" name="addButton" value="Add" onclick="addTask()">
+    <br>
+    <input type="text" id="input" name="addButton" placeholder="enter task...">
+
+    <hr>
+    <ul id="tasks">
+      <li>
+        <input type="button" class="done" onclick="markDone(this.parentNode)" value="&#x2713;" />
+        <input type="button" class="remove" onclick="remove(this.parentNode)" value="&#x2715;" />
+        make todo list
+      </li>
+    </ul>
+    <hr>
+
+    <!-- STEPs 8 and 9 below here  -->
+
+    <!-- STEP 13 below here  -->
+  </body>
+</html>

@@ -9,11 +9,13 @@ div {
   margin: 10pt;
   border: 1px solid lightgray;
   font-size: 16pt;
+  background-color: gray;
 }
 
-#div1 {
-  background-color: blue;
+.yellowback{
+  background-color: yellow;
 }
-#div2 {
-  background-color: gray;
+
+.blueback {
+  background-color: blue;
 }

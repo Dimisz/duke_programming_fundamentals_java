@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Color Picker</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <h1>Color Picker</h1>
+
+    <div class="firstCanvas">
+      <canvas id="canvas1"></canvas>
+      <br>
+      <input type="button" name="makeYellow" value="Make Yellow" onclick="makeYellow()">
+      <input type="color" id="clr1" name="pickColor" value="#001A57" onchange="changeColor()">
+    </div>
+
+    <div class="secondCanvas">
+      <canvas id="cn"></canvas>
+      <br>
+      <!-- <input type="color" id="clr2" name="pickColor2" value="#001A57"> -->
+      <br>
+      <hr>
+      <input type="button" name="makeGreen" value="Make Green" onclick="makeGreen()">
+      <input type="color" id="clr2" name="pickColor2" value="#001A57" onchange="changeColor2()">
+
+
+      <input type="range" min="10" max="100" id="sldr" value="10" oninput="drawSquare()">
+      <!-- <input type="button" name="drawSquare" value="Draw Square" onclick="drawSquare()"> -->
+      <p>Make square using slider.</p>
+    </div>
+
+  </body>
+</html>

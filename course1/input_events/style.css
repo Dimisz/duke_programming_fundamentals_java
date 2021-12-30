@@ -1,0 +1,10 @@
+canvas {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #c3c3c3;
+  background-color: lightblue;
+}
+
+div {
+  padding: 20px;
+}

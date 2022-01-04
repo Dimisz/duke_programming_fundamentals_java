@@ -17,3 +17,13 @@ function makeGray(){
   var imgcanvas = document.getElementById('can');
   image.drawTo(imgcanvas);
 }
+
+function clearCanvas(){
+  var canvasElt = document.getElementById('can');
+  var context = canvasElt.getContext("2d");
+  context.clearRect(0, 0, canvasElt.width, canvasElt.height);
+  var ImgFile = document.getElementById('finput');
+  ImgFile.value = "";
+
+  //alert("Hi");
+}

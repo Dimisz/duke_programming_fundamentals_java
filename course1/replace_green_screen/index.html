@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Upload an image</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js">
+    </script>
+  </head>
+  <body>
+    <h1>Change background of an image</h1>
+
+    <canvas id="fgCanvas"></canvas>
+    <canvas id="bgCanvas"></canvas>
+    <canvas id="resultCanvas"></canvas>
+    <p>Filename:
+      <input type="file" multiple="false" accept="image/*" id="fgfile" onchange="uploadForegroundImage()">
+    </p>
+    <p>Filename:
+      <input type="file" multiple="false" accept="image/*" id="bgfile" onchange="uploadBackgroundImage()">
+    </p>
+    <p>
+      <input type="button" name="" value="Replace Background" onclick="replaceBackground()">
+      <input type="button" value="Clear" onclick="clearCanvas()">
+    </p>
+
+
+  </body>
+  <script src="script.js">
+
+  </script>
+</html>

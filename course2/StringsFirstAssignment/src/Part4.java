@@ -16,6 +16,7 @@ public class Part4 {
                 int last = s.lastIndexOf("\">");
                 String resultStr = s.substring(first+9, last);
                 System.out.println(resultStr);
+
                 count++;
             }
         }

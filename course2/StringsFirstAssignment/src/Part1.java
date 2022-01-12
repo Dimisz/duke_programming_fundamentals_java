@@ -1,6 +1,7 @@
 public class Part1 {
     public static void main(String[] args) {
         testSimpleGene();
+        System.out.println("Test Q1: " + findSimpleGene("AAATGCCCTAACTAGATTAAGAAACC"));
     }
 
 

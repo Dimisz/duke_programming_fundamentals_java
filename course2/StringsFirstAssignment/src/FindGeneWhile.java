@@ -1,7 +1,9 @@
+import edu.duke.StorageResource;
+
 public class FindGeneWhile {
     public static void main(String[] args) {
         //testFindGeneSimple();
-        test();
+        testOn("AATGCGTAATTAATCG");
     }
     public static String findGene(String dna, int where){
         int startIndex = dna.indexOf("ATG", where);
@@ -33,6 +35,24 @@ public class FindGeneWhile {
         }
     }
 
+    public static StorageResource getAllGenes(String dna){
+        StorageResource geneList = new StorageResource();
+        int startIndex = 0;
+        while(true){
+            //find the next gene after startIndex
+            String currentGene = findGene(dna, startIndex);
+            //if no gene found -> leave the loop
+            if (currentGene.isEmpty()){
+                break;
+            }
+            geneList.add(currentGene);
+            //print the gene
+            //System.out.println(currentGene);
+            startIndex = dna.indexOf(currentGene, startIndex) + currentGene.length();
+        }
+        return geneList;
+    }
+
 
     //TESTS
     public static void testFindGeneSimple(){
@@ -44,7 +64,11 @@ public class FindGeneWhile {
 
     public static void testOn(String dna){
         System.out.println("Testing printAllGenes on " + dna);
-        printAllGenes(dna);
+        StorageResource genes = getAllGenes(dna);
+        for (String g : genes.data()){
+            System.out.println(g);
+        }
+        //printAllGenes(dna);
     }
 
     public static void test(){

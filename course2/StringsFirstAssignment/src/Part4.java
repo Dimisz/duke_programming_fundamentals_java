@@ -7,6 +7,7 @@ import edu.duke.*;
 public class Part4 {
     public static void main(String[] args) {
         URLResource ur = new URLResource("https://www.dukelearntoprogram.com//course2/data/manylinks.html");
+       // URLResource ur = new URLResource("https://www.dukelearntoprogram.com//course2/data/manylinks.html")
         int count = 0;
         for (String s : ur.lines()) {
             String temp = s.toLowerCase();

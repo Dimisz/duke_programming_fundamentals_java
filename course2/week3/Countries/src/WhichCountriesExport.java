@@ -9,8 +9,8 @@ public class WhichCountriesExport {
         CSVParser parser = fr.getCSVParser();
 //        countryInfo(parser, "Nauru");
 //        findExport();
-//        listExportersTwoProducts(parser, "gold", "diamonds");
-//        System.out.println(numberOfExporters(parser, "gold"));
+//        listExportersTwoProducts(parser, "cotton", "flowers");
+//        System.out.println(numberOfExporters(parser, "cocoa"));
         bigExporters(parser, "$999,999,999,999");
     }
 
@@ -64,7 +64,7 @@ public class WhichCountriesExport {
     public static void findExport(){
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
-        String exportOfInterest = "coffee";
+        String exportOfInterest = "cocoa";
         for(CSVRecord record : parser){
             if(record.get("Exports").contains(exportOfInterest)){
                 System.out.print(record.get("Country") + "\t");

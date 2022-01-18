@@ -1,8 +1,14 @@
 import edu.duke.*;
 
+import java.io.File;
+import java.io.IOException;
+
 public class GrayScaleConverter {
     public static void main(String[] args) {
-        testGray();
+        //testGray();
+
+        selectConvertAndSave();
+        }
     }
     public static ImageResource makeGray(ImageResource inImage){
         ImageResource outImage = new ImageResource(inImage.getWidth(), inImage.getHeight());
@@ -16,6 +22,32 @@ public class GrayScaleConverter {
         }
         return outImage;
     }
+
+    public static void selectConvertAndSave() throws IOException {
+        DirectoryResource dr = new DirectoryResource();
+        for (File f : dr.selectedFiles()){
+            ImageResource inImage = new ImageResource(f);
+
+            String fname = inImage.getFileName();
+            String newName = "gray-" + fname;
+            ImageResource gray = makeGray(inImage);
+            gray.setFileName(newName);
+            //gray.draw();
+            gray.save();
+        }
+    }
+
+//    public static void doSave(){
+//        DirectoryResource dr = new DirectoryResource();
+//        for(File f : dr.selectedFiles()){
+//            ImageResource image = new ImageResource(f);
+//            String fname = image.getFileName();
+//            String newName = "copy-" + fname;
+//            image.setFileName(newName);
+//            image.draw();
+//            image.save();
+//        }
+//    }
 
     public static void testGray(){
         ImageResource ir = new ImageResource();

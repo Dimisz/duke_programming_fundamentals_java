@@ -9,7 +9,7 @@ public class GrayScaleConverter {
 
         selectConvertAndSave();
         }
-    }
+
     public static ImageResource makeGray(ImageResource inImage){
         ImageResource outImage = new ImageResource(inImage.getWidth(), inImage.getHeight());
 
@@ -23,7 +23,7 @@ public class GrayScaleConverter {
         return outImage;
     }
 
-    public static void selectConvertAndSave() throws IOException {
+    public static void selectConvertAndSave() {
         DirectoryResource dr = new DirectoryResource();
         for (File f : dr.selectedFiles()){
             ImageResource inImage = new ImageResource(f);

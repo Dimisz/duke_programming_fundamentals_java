@@ -4,9 +4,11 @@ public class CaesarCipher {
 
     public static void main(String[] args) {
         // testCaesar();
-        System.out.println(encrypt("FIRST LEGION ATTACK EAST FLANK!", 23));
-        System.out.println(encrypt("First Legion", 17));
-        System.out.println(encryptTwoKeys("First Legion", 23, 17));
+//        System.out.println(encrypt("FIRST LEGION ATTACK EAST FLANK!", 23));
+//        System.out.println(encrypt("First Legion", 17));
+//        System.out.println(encryptTwoKeys("First Legion", 23, 17));
+        System.out.println(encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15));
+        System.out.println(encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21));
     }
 
     public static String encryptTwoKeys(String input, int key1, int key2){

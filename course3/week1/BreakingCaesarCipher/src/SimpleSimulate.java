@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class SimpleSimulate {
     public static void main(String[] args) {
-        simpleSimulate(10000);
+        simpleSimulate(10);
     }
     public static void simpleSimulate(int rolls){
         Random rand = new Random();
@@ -15,7 +15,7 @@ public class SimpleSimulate {
         }
 
         for(int j = 2; j <= 12; j++){
-            System.out.println(j + "'s:\t" + counts[j] + "\t" + 100*counts[j]/rolls + "%");
+            System.out.println(j + "'s:\t" + counts[j] + "\t" + 100.0 * counts[j]/rolls + "%");
         }
     }
 

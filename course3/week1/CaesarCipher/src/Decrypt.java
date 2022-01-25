@@ -29,6 +29,8 @@ public class Decrypt {
         String secondHalf = halfOfString(encrypted, 1);
         int firstKey = getKey(firstHalf);
         int secondKey = getKey(secondHalf);
+//        int firstKey = 14;
+//        int secondKey = 24;
         System.out.println("First key: " + firstKey);
         System.out.println("Second key: " + secondKey);
 
@@ -122,7 +124,7 @@ public class Decrypt {
     public static void testDecryptTwoKeys(){
         FileResource fr = new FileResource();
         String message = fr.asString();
-//        String message = "Akag tjw Xibhr awoa aoee xakex znxag xwko";
+//        String message = "Aal uttx hm aal Qtct Fhljha pl Wbdl. Pvxvxlx!";
         System.out.println("=========Decrypting========");
         String decrypted = decryptTwoKeys(message);
         System.out.println(decrypted);

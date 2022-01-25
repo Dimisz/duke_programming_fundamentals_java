@@ -3,12 +3,17 @@ import edu.duke.FileResource;
 public class CaesarCipher {
 
     public static void main(String[] args) {
-        // testCaesar();
+        String message = "Can you imagine life WITHOUT the internet AND computers in your pocket?";
+        String encryptedMessage = encryptTwoKeys(message, 21, 8);
+        System.out.println(encryptedMessage);
+
+
+//         testCaesar();
 //        System.out.println(encrypt("FIRST LEGION ATTACK EAST FLANK!", 23));
 //        System.out.println(encrypt("First Legion", 17));
 //        System.out.println(encryptTwoKeys("First Legion", 23, 17));
-        System.out.println(encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15));
-        System.out.println(encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21));
+//        System.out.println(encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15));
+//        System.out.println(encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21));
     }
 
     public static String encryptTwoKeys(String input, int key1, int key2){
@@ -76,9 +81,10 @@ public class CaesarCipher {
     }
 
     public static void testCaesar(){
-        int key = 17;
-        FileResource fr = new FileResource();
-        String message = fr.asString();
+        int key = 15;
+        //FileResource fr = new FileResource();
+        //String message = fr.asString();
+        String message = "Can you imagine life WITHOUT the internet AND computers in your pocket?";
         String encrypted = encrypt(message, key);
         System.out.println(encrypted);
         String decrypted = encrypt(encrypted, 26-key);

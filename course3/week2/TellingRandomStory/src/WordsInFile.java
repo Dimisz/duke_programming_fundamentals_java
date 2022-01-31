@@ -19,8 +19,10 @@ public class WordsInFile {
         String filename = f.getName();
         for(String s : fr.words()){
 
-           if(wordsInFiles.keySet().contains(s)){
-               wordsInFiles.get(s).add(filename);
+           if(wordsInFiles.keySet().contains(s)){// &&
+               if(wordsInFiles.get(s).indexOf(filename) == -1){
+                   wordsInFiles.get(s).add(filename);
+               }
            }
            else{
                ArrayList<String> al = new ArrayList<String>();
@@ -55,6 +57,7 @@ public class WordsInFile {
                 wordsInFiles.entrySet()) {
             int currentLength = set.getValue().size();
             if(currentLength == occurrences){
+                System.out.println(set.getKey() + ": " + set.getValue());
                 words.add(set.getKey());
             }
         }
@@ -87,19 +90,22 @@ public class WordsInFile {
     public static void main(String[] args) {
         WordsInFile wf = new WordsInFile();
         wf.buildWordFileMap();
-        wf.printHashMap();
-        System.out.println(wf.maxNumber());
-        System.out.println("\n=====Words in 3 files=====");
-        ArrayList<String> al1 = wf.wordsInNumFiles(3);
-        for(String s : al1){
-            System.out.println(s + " ");
-        }
-        System.out.println("\n=====Words in 2 files=====");
-        ArrayList<String> al2 = wf.wordsInNumFiles(2);
-        for(String s : al2){
-            System.out.println(s + " ");
-        }
-        System.out.println("\n=====Print files in cats=====");
-        wf.printFilesIn("cats");
+       // wf.printHashMap();
+//        System.out.println(wf.maxNumber());
+//        System.out.println("\n=====Words in 3 files=====");
+//        ArrayList<String> al1 = wf.wordsInNumFiles(3);
+//        for(String s : al1){
+//            System.out.println(s + " ");
+//        }
+//        System.out.println("\n=====Words in 2 files=====");
+//        ArrayList<String> al2 = wf.wordsInNumFiles(2);
+//        for(String s : al2){
+//            System.out.println(s + " ");
+//        }
+//        System.out.println("\n=====Print files in cats=====");
+//        wf.printFilesIn("cats");
+//        int ind = wf.wordsInNumFiles(4).size();
+//        System.out.println(ind);
+        wf.printFilesIn("tree");
     }
 }

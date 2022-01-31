@@ -55,4 +55,10 @@ public class CharactersInPlay {
             }
         }
     }
+
+    public static void main(String[] args) {
+        CharactersInPlay charInPlay = new CharactersInPlay();
+        charInPlay.findAllCharacters();
+        charInPlay.charactersWithNumParts(10, 100);
+    }
 }

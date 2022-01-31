@@ -57,4 +57,9 @@ public class WordFrequencies {
         System.out.println("Most frequent word: " + myWords.get(max));
         System.out.println("Occurred " + myFreqs.get(max) + " times");
     }
+
+    public static void main(String[] args) {
+        WordFrequencies wordFreqs = new WordFrequencies();
+        wordFreqs.tester();
+    }
 }

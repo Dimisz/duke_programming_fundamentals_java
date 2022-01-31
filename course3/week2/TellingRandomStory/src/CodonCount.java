@@ -22,6 +22,7 @@ public class CodonCount {
                 codonsCount.put(codon, 1);
             }
         }
+        System.out.println(codonsCount.size());
     }
 
     public String getMostCommonCodon(){
@@ -34,6 +35,8 @@ public class CodonCount {
                 maxCodon = set.getKey();
             }
         }
+        System.out.println("Most common codon: " + maxCodon);
+        System.out.println("Occurs: " + occurrencesCount);
         return maxCodon;
     }
 
@@ -61,5 +64,16 @@ public class CodonCount {
         System.out.println("Max occurrences: " + getMostCommonCodon());
         printCodonsCounts(1, 3);
 
+    }
+
+    public static void main(String[] args) {
+        CodonCount cc = new CodonCount();
+        FileResource fr = new FileResource();
+        String codonToCheck = fr.asString().toUpperCase().trim();
+        cc.buildCodonMap(0, codonToCheck);
+//        cc.buildCodonMap(1, codonToCheck);
+//        cc.buildCodonMap(2, codonToCheck);
+//        cc.getMostCommonCodon();
+        cc.printCodonsCounts(7, 7);
     }
 }

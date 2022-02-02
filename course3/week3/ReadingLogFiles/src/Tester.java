@@ -17,8 +17,16 @@ public class Tester {
         logAnalyzer.printAll();
     }
 
+    public static void testUniqueIPs(){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile(); // choose file from your resource
+        int uniqueIPs = la.countUniqueIPs();
+        System.out.println("There are " + uniqueIPs + " IPs");
+    }
+
     public static void main(String[] args) {
 //        testLogEntry();
-        testLogAnalyzer();
+//        testLogAnalyzer();
+        testUniqueIPs();
     }
 }

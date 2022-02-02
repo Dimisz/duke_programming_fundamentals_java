@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Tester {
@@ -24,9 +25,35 @@ public class Tester {
         System.out.println("There are " + uniqueIPs + " IPs");
     }
 
+    public static void testPrintAllHigherThanNum(int num){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile();
+        la.printAllHigherThanNum(num);
+    }
+
+    public static void testUniqueIPVisitsOnDay(String day){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile();
+        ArrayList<String> ips = la.uniqueIPVisitsOnDay(day);
+        System.out.println("There are " + ips.size() + " unique ips");
+        for(String ip : ips){
+            System.out.println(ip);
+        }
+    }
+
+    public static void testCountUniqueIPsInRange(int low, int high){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile();
+        int unique = la.countUniqueIPsInRange(low, high);
+        System.out.println(unique);
+    }
+
     public static void main(String[] args) {
 //        testLogEntry();
 //        testLogAnalyzer();
-        testUniqueIPs();
+//        testUniqueIPs();
+//        testPrintAllHigherThanNum(400);
+//        testUniqueIPVisitsOnDay("Mar 17");
+        testCountUniqueIPsInRange(300, 399);
     }
 }

@@ -1,6 +1,7 @@
 import edu.duke.FileResource;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LogAnalyzer {
     private ArrayList<LogEntry> records;
@@ -76,5 +77,61 @@ public class LogAnalyzer {
         for(LogEntry le : records){
             System.out.println(le);
         }
+    }
+
+    public HashMap<String, Integer> countVisitsPerIP(){
+        HashMap<String, Integer> counts = new HashMap<String, Integer>();
+        for(LogEntry le : records){
+            String ip = le.getIpAddress();
+            if(!counts.containsKey(ip)){
+                counts.put(ip, 1);
+            }
+            else {
+                counts.put(ip, counts.get(ip) + 1);
+            }
+        }
+        return counts;
+    }
+
+    public int mostNumberVisitsByIP(HashMap<String, Integer> counts){
+        int max = 0;
+        for(String key : counts.keySet()){
+            int currentCount = counts.get(key);
+            if(currentCount > max) max = currentCount;
+        }
+        return max;
+    }
+
+    public ArrayList<String> iPsMostVisits(HashMap<String, Integer> counts){
+        ArrayList<String> IPsWithMostVisit = new ArrayList<String>();
+        int maxVisits = mostNumberVisitsByIP(counts);
+        for(String ipAddress : counts.keySet()){
+            if(counts.get(ipAddress) == maxVisits){
+                IPsWithMostVisit.add(ipAddress);
+            }
+        }
+        return IPsWithMostVisit;
+    }
+
+    public HashMap<String, ArrayList<String>> iPsForDays(){
+        HashMap<String, ArrayList<String>> ipsByDays = new HashMap<String, ArrayList<String>>();
+        for(LogEntry le : records){
+            String leDateAsString = le.getAccessTime().toString();
+            String leDay = leDateAsString.substring(4, 10);
+            if(!ipsByDays.containsKey(leDay)){
+                ArrayList<String> ips = new ArrayList<String>();
+                String ip = le.getIpAddress();
+                ips.add(ip);
+                ipsByDays.put(leDay, ips);
+            }
+            else{
+                ArrayList<String> ips = new ArrayList<String>();
+                ips = ipsByDays.get(leDay);
+                String ip = le.getIpAddress();
+                ips.add(ip);
+                ipsByDays.put(leDay, ips);
+            }
+        }
+        return ipsByDays;
     }
 }

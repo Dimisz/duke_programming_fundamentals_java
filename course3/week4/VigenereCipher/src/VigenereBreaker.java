@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.*;
 import edu.duke.*;
 
@@ -85,6 +86,82 @@ public class VigenereBreaker {
         System.out.println(result);
     }
 
+    // ===========PART 3=======================
+    public char mostCommonCharIn(HashSet<String> dict){
+        HashMap<Character, Integer> charCounts = new HashMap<Character, Integer>();
+        for(String word : dict){
+            for(int i = 0; i < word.length(); i++){
+                char currentChar = word.charAt(i);
+                if(!charCounts.keySet().contains(currentChar)){
+                    charCounts.put(currentChar, 1);
+                }
+                else{
+                    charCounts.put(currentChar, charCounts.get(currentChar)+1);
+                }
+
+            }
+        }
+        int maxCount = 0;
+        char maxChar = 'n';
+        for(Character c : charCounts.keySet()){
+            if(charCounts.get(c) > maxCount){
+                maxCount = charCounts.get(c);
+                maxChar = c;
+            }
+        }
+//        System.out.println("Max char: " + maxChar);
+//        System.out.println("With count of: " + maxCount);
+        return maxChar;
+    }
+
+    public void breakForAllLangs(String encrypted, HashMap<String, HashSet<String>> dicts){
+        String mostRealDecryption = "Not decrypted yet";
+        String language = "Not defined";
+        int maxWords = 0;
+        for(String lang : dicts.keySet()){
+            char mostCommonChar = mostCommonCharIn(dicts.get(lang));
+            for(int i = 1; i < 101; i++){
+                int[] key = tryKeyLength(encrypted, i, mostCommonChar);
+                VigenereCipher vc = new VigenereCipher(key);
+                String decrypted = vc.decrypt(encrypted);
+                int wordCounts = countWords(decrypted, dicts.get(lang));
+                if(wordCounts > maxWords){
+                    maxWords = wordCounts;
+                    language = lang;
+                    mostRealDecryption = decrypted;
+                   // usedKLength = i;
+                }
+//                if(i == 38){
+//                    System.out.println("Key: " + i);
+//                    System.out.println("Valid words: " + wordCounts);
+//                }
+            }
+        }
+        System.out.println("Language: " + language);
+        System.out.println(mostRealDecryption);
+    }
+
+    public HashMap<String, HashSet<String>> makeDicts(){
+        HashMap<String, HashSet<String>> dicts = new HashMap<String, HashSet<String>>();
+        DirectoryResource dr = new DirectoryResource();
+        for(File f : dr.selectedFiles()){
+            String name = f.getName();
+            FileResource fr = new FileResource(f);
+            HashSet<String> dictionary = new HashSet<String>();
+            for(String word : fr.lines()){
+                dictionary.add(word.toLowerCase());
+            }
+            dicts.put(name, dictionary);
+        }
+        return dicts;
+    }
+
+    public void breakVigenereFinal() {
+        HashMap<String, HashSet<String>> dicts = makeDicts();
+        FileResource fr = new FileResource();
+        String text = fr.asString();
+        breakForAllLangs(text, dicts);
+    }
 
 
     //=============TESTS=======================
@@ -146,13 +223,26 @@ public class VigenereBreaker {
         vb.breakVigenereWithoutKey();
     }
 
+    public static void testMostCommonCharIn(){
+        VigenereBreaker vb = new VigenereBreaker();
+        HashSet<String> dict = vb.readDictionary();
+        vb.mostCommonCharIn(dict);
+    }
+
+    public static void testBreakVigenereFinal(){
+        VigenereBreaker vb = new VigenereBreaker();
+        vb.breakVigenereFinal();
+    }
+
     //=============================================
     //=============================================
     public static void main(String[] args) {
 //        testSliceString();
 //        testTryKeyLength();
 //        testBreakVigenereWithKey();
-        testBreakVigenereWithoutKey();
+//        testBreakVigenereWithoutKey();
+//        testMostCommonCharIn();
+        testBreakVigenereFinal();
     }
     
 }

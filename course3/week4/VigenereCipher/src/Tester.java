@@ -34,9 +34,23 @@ public class Tester {
         System.out.println(decrypted);
     }
 
+    public static void testVigenereCipher(int[] key){
+        VigenereCipher vc = new VigenereCipher(key);
+        FileResource fr = new FileResource();
+        String text = fr.asString();
+        System.out.println(text);
+
+        String encrypted = vc.encrypt(text);
+        System.out.println(encrypted);
+        String decrypted = vc.decrypt(encrypted);
+        System.out.println("\n" + decrypted);
+    }
+
     public static void main(String[] args) {
 //        testCaesarCipher();
 //        testCaesarCrackerEnglish();
-        testCaesarCrackerNonEnglish('a');
+//        testCaesarCrackerNonEnglish('a');
+        int[] key = {17, 14, 12, 4};
+        testVigenereCipher(key);
     }
 }

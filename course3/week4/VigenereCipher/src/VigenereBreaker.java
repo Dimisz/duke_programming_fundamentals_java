@@ -13,12 +13,30 @@ public class VigenereBreaker {
 
     public int[] tryKeyLength(String encrypted, int klength, char mostCommon) {
         int[] key = new int[klength];
-        //WRITE YOUR CODE HERE
+        CaesarCracker cc = new CaesarCracker(mostCommon);
+        for(int i = 0; i < klength; i++){
+            String slice = sliceString(encrypted, i, klength);
+            key[i] = cc.getKey(slice);
+        }
         return key;
     }
 
     public void breakVigenere () {
         //WRITE YOUR CODE HERE
+    }
+
+
+
+    //=============TESTS=======================
+    //=========================================
+    public static void testTryKeyLength(){
+        FileResource fr = new FileResource();
+        String msg = fr.asString();
+        VigenereBreaker vb = new VigenereBreaker();
+        int[] keys = vb.tryKeyLength(msg, 5, 'e');
+        for(int i : keys){
+            System.out.print(i + ", ");
+        }
     }
 
     public static void testSliceString(){
@@ -57,8 +75,11 @@ public class VigenereBreaker {
         System.out.println("ej :\t" + slice);
     }
 
+    //=============================================
+    //=============================================
     public static void main(String[] args) {
-        testSliceString();
+//        testSliceString();
+        testTryKeyLength();
     }
     
 }

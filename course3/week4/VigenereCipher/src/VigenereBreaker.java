@@ -22,7 +22,12 @@ public class VigenereBreaker {
     }
 
     public void breakVigenere () {
-        //WRITE YOUR CODE HERE
+        FileResource fr = new FileResource();
+        String text = fr.asString();
+        int[] key = tryKeyLength(text, 5, 'e');
+        VigenereCipher vc = new VigenereCipher(key);
+        String message = vc.decrypt(text);
+        System.out.println(message);
     }
 
 
@@ -75,11 +80,17 @@ public class VigenereBreaker {
         System.out.println("ej :\t" + slice);
     }
 
+    public static void testBreakVigenere(){
+        VigenereBreaker vb = new VigenereBreaker();
+        vb.breakVigenere();
+    }
+
     //=============================================
     //=============================================
     public static void main(String[] args) {
 //        testSliceString();
-        testTryKeyLength();
+//        testTryKeyLength();
+        testBreakVigenere();
     }
     
 }

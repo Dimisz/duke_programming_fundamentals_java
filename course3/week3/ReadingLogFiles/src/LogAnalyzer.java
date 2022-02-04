@@ -134,4 +134,33 @@ public class LogAnalyzer {
         }
         return ipsByDays;
     }
+
+    public String dayWithMostIPVisits(HashMap<String, ArrayList<String>> ipsByDay){
+        String dayWithMaxVisits = "No records";
+        int maxVisitsPerDay = 0;
+        for(String day : ipsByDay.keySet()){
+            int visitsPerDay = ipsByDay.get(day).size();
+            if(visitsPerDay > maxVisitsPerDay){
+                maxVisitsPerDay = visitsPerDay;
+                dayWithMaxVisits = day;
+            }
+        }
+        return dayWithMaxVisits;
+    }
+
+    public ArrayList<String> iPsWithMostVisitsOnDay(HashMap<String, ArrayList<String>> counts, String day){
+        ArrayList<String> ips = new ArrayList<String>();
+        HashMap<String, Integer> ipsCounts = new HashMap<String, Integer>();
+        ips = counts.get(day);
+        for(String ip : ips){
+            if(!ipsCounts.containsKey(ip)){
+                ipsCounts.put(ip, 1);
+            }
+            else {
+                ipsCounts.put(ip, ipsCounts.get(ip) + 1);
+            }
+        }
+        ArrayList<String> ipsMostVisits = iPsMostVisits(ipsCounts);
+        return ipsMostVisits;
+    }
 }

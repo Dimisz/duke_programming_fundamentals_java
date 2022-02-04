@@ -53,7 +53,7 @@ public class Tester {
 //        testLogAnalyzer();
 //        testUniqueIPs();
 //        testPrintAllHigherThanNum(400);
-//        testUniqueIPVisitsOnDay("Mar 17");
-        testCountUniqueIPsInRange(300, 399);
+//        testUniqueIPVisitsOnDay("Sep 27");
+//        testCountUniqueIPsInRange(400, 499);
     }
 }

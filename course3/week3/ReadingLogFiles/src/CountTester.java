@@ -45,10 +45,28 @@ public class CountTester {
         }
     }
 
+    public static void testDayWithMostIPVisits(){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile();
+        HashMap<String, ArrayList<String>> ipsByDays = la.iPsForDays();
+        String dayWithMaxVisits = la.dayWithMostIPVisits(ipsByDays);
+        System.out.println(dayWithMaxVisits);
+    }
+
+    public static void testIPsWithMostVisitsOnDay(String day){
+        LogAnalyzer la = new LogAnalyzer();
+        la.readFile();
+        HashMap<String, ArrayList<String>> ipsByDays = la.iPsForDays();
+        ArrayList<String> ipsOnDay = la.iPsWithMostVisitsOnDay(ipsByDays, day);
+        for(String ip : ipsOnDay) System.out.println(ip);
+    }
+
     public static void main(String[] args) {
 //        testCounts();
 //        testMostNumberVisitsByIP();
 //        testIPsMostVisits();
-        testIPsForDays();
+//        testIPsForDays();
+//        testDayWithMostIPVisits();
+        testIPsWithMostVisitsOnDay("Sep 30");
     }
 }

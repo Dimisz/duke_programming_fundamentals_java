@@ -11,15 +11,29 @@ import java.util.*;
 public class ClosestQuakes {
     public ArrayList<QuakeEntry> getClosest(ArrayList<QuakeEntry> quakeData, Location current, int howMany) {
         ArrayList<QuakeEntry> ret = new ArrayList<QuakeEntry>();
+        ArrayList<QuakeEntry> copy = new ArrayList<QuakeEntry>(quakeData);
         // TO DO
-
+        for(int j = 0; j < howMany; j++) {
+            int minIndex = 0;
+            for (int i = 0; i < copy.size(); i++) {
+                QuakeEntry quake = copy.get(i);
+                Location loc = quake.getLocation();
+                if (loc.distanceTo(current) <
+                        copy.get(minIndex).getLocation().distanceTo(current)) {
+                    minIndex = i;
+                }
+            }
+            ret.add((copy.get(minIndex)));
+            copy.remove(minIndex);
+        }
         return ret;
     }
 
+
     public void findClosestQuakes() {
         EarthQuakeParser parser = new EarthQuakeParser();
-        //String source = "data/nov20quakedata.atom";
-        String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "/Users/mbpro/Downloads/SearchingEarthquakeDataStarterProgram/data/nov20quakedata.atom";
+//        String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);
         System.out.println("read data for "+list.size());
 
@@ -32,6 +46,13 @@ public class ClosestQuakes {
             System.out.printf("%4.2f\t %s\n", distanceInMeters/1000,entry);
         }
         System.out.println("number found: "+close.size());
+    }
+
+
+    //ADDED FOR TESTING
+    public static void main(String[] args) {
+        ClosestQuakes cq = new ClosestQuakes();
+        cq.findClosestQuakes();
     }
     
 }

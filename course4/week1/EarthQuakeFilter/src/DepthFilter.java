@@ -11,4 +11,8 @@ public class DepthFilter implements Filter{
         double depth = qe.getDepth();
         return (depth >= minDepth) && (depth <= maxDepth);
     }
+
+    public String getName(){
+        return getClass().getName();
+    }
 }

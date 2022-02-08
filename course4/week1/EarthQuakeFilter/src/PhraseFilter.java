@@ -19,4 +19,8 @@ public class PhraseFilter implements Filter{
         }
         return false;
     }
+
+    public String getName(){
+        return getClass().getName();
+    }
 }

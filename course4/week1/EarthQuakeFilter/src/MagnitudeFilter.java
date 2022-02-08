@@ -11,4 +11,8 @@ public class MagnitudeFilter implements Filter{
         double magnitude = qe.getMagnitude();
         return (magnitude >= minMagnitude) && (magnitude <= maxMagnitude);
     }
+
+    public String getName(){
+        return getClass().getName();
+    }
 }

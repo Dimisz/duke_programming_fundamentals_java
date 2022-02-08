@@ -11,4 +11,8 @@ public class DistanceFilter implements Filter{
         double distance = location.distanceTo(qe.getLocation());
         return distance < maxDistance;
     }
+
+    public String getName(){
+        return getClass().getName();
+    }
 }

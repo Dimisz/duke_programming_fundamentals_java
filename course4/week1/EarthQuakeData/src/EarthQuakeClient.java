@@ -75,7 +75,7 @@ public class EarthQuakeClient {
         ArrayList<QuakeEntry> list  = parser.read(source);
         System.out.println("read data for "+list.size()+" quakes");
 
-        ArrayList<QuakeEntry> listBig = filterByDepth(list, -8000.0, -5000.0);
+        ArrayList<QuakeEntry> listBig = filterByDepth(list, -4000.0, -2000.0);
         for(QuakeEntry qe : listBig){
             System.out.println(qe);
         }
@@ -171,8 +171,8 @@ public class EarthQuakeClient {
 //        eqClient.createCSV();
 //        eqClient.bigQuakes();
 //        eqClient.closeToMe();
-//        eqClient.quakesOfDepth();
-        eqClient.quakesByPhrase();
+        eqClient.quakesOfDepth();
+//        eqClient.quakesByPhrase();
     }
     
 }

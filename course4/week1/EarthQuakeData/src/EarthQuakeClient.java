@@ -17,6 +17,26 @@ public class EarthQuakeClient {
         return answer;
     }
 
+    public ArrayList<QuakeEntry> filterByPhrase(ArrayList<QuakeEntry> quakeData,
+                                                   String where, String phrase) {
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        for(QuakeEntry qe : quakeData){
+            String title = qe.getInfo();
+            if(where.equals("start")){
+                if(title.startsWith(phrase)){
+                    answer.add(qe);
+                }
+            }
+            else if(where.equals("end")){
+                if(title.endsWith(phrase)){
+                    answer.add(qe);
+                }
+            }
+
+        }
+        return answer;
+    }
+
     public ArrayList<QuakeEntry> filterByDepth(ArrayList<QuakeEntry> quakeData,
                                                    double minDepth, double maxDepth) {
         ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();

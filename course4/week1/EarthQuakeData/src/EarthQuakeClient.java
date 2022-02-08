@@ -32,10 +32,29 @@ public class EarthQuakeClient {
                     answer.add(qe);
                 }
             }
-
+            else if(where.equals("any")){
+                if(title.contains(phrase)){
+                    answer.add(qe);
+                }
+            }
         }
         return answer;
     }
+
+    public void quakesByPhrase(){
+        EarthQuakeParser parser = new EarthQuakeParser();
+//        String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "/Users/mbpro/Downloads/SearchingEarthquakeDataStarterProgram/data/nov20quakedatasmall.atom";
+        ArrayList<QuakeEntry> list  = parser.read(source);
+        System.out.println("read data for "+list.size()+" quakes");
+
+        ArrayList<QuakeEntry> listBig = filterByPhrase(list, "end", "California");
+        for(QuakeEntry qe : listBig){
+            System.out.println(qe);
+        }
+        System.out.println("Found " + listBig.size() + " quakes to match that criteria");
+    }
+
 
     public ArrayList<QuakeEntry> filterByDepth(ArrayList<QuakeEntry> quakeData,
                                                    double minDepth, double maxDepth) {
@@ -56,17 +75,11 @@ public class EarthQuakeClient {
         ArrayList<QuakeEntry> list  = parser.read(source);
         System.out.println("read data for "+list.size()+" quakes");
 
-//        for(QuakeEntry qe : list){
-//            if(qe.getMagnitude() > 5.0){
-//                System.out.println(qe);
-//            }
-//        }
         ArrayList<QuakeEntry> listBig = filterByDepth(list, -10000.0, -5000.0);
         for(QuakeEntry qe : listBig){
             System.out.println(qe);
         }
         System.out.println("Found " + listBig.size() + " quakes to match that criteria");
-
     }
 
     public ArrayList<QuakeEntry> filterByDistanceFrom(ArrayList<QuakeEntry> quakeData,
@@ -158,8 +171,8 @@ public class EarthQuakeClient {
 //        eqClient.createCSV();
 //        eqClient.bigQuakes();
 //        eqClient.closeToMe();
-        eqClient.quakesOfDepth();
-//        ClosestQuakes cq =
+//        eqClient.quakesOfDepth();
+        eqClient.quakesByPhrase();
     }
     
 }

@@ -17,6 +17,38 @@ public class EarthQuakeClient {
         return answer;
     }
 
+    public ArrayList<QuakeEntry> filterByDepth(ArrayList<QuakeEntry> quakeData,
+                                                   double minDepth, double maxDepth) {
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        for(QuakeEntry qe : quakeData){
+            double depth = qe.getDepth();
+            if(depth > minDepth && depth < maxDepth){
+                answer.add(qe);
+            }
+        }
+        return answer;
+    }
+
+    public void quakesOfDepth(){
+        EarthQuakeParser parser = new EarthQuakeParser();
+//        String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "/Users/mbpro/Downloads/SearchingEarthquakeDataStarterProgram/data/nov20quakedatasmall.atom";
+        ArrayList<QuakeEntry> list  = parser.read(source);
+        System.out.println("read data for "+list.size()+" quakes");
+
+//        for(QuakeEntry qe : list){
+//            if(qe.getMagnitude() > 5.0){
+//                System.out.println(qe);
+//            }
+//        }
+        ArrayList<QuakeEntry> listBig = filterByDepth(list, -10000.0, -5000.0);
+        for(QuakeEntry qe : listBig){
+            System.out.println(qe);
+        }
+        System.out.println("Found " + listBig.size() + " quakes to match that criteria");
+
+    }
+
     public ArrayList<QuakeEntry> filterByDistanceFrom(ArrayList<QuakeEntry> quakeData,
     double distMax,
     Location from) {
@@ -105,8 +137,8 @@ public class EarthQuakeClient {
         EarthQuakeClient eqClient = new EarthQuakeClient();
 //        eqClient.createCSV();
 //        eqClient.bigQuakes();
-        eqClient.closeToMe();
-
+//        eqClient.closeToMe();
+        eqClient.quakesOfDepth();
 //        ClosestQuakes cq =
     }
     

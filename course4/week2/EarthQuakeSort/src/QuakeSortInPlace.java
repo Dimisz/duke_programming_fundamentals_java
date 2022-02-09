@@ -25,7 +25,7 @@ public class QuakeSortInPlace {
     }
     
     public void sortByMagnitude(ArrayList<QuakeEntry> in) {
-       
+
        for (int i=0; i< in.size(); i++) {
             int minIdx = getSmallestMagnitude(in,i);
             QuakeEntry qi = in.get(i);
@@ -33,7 +33,6 @@ public class QuakeSortInPlace {
             in.set(i,qmin);
             in.set(minIdx,qi);
         }
-        
     }
 
     // ==========   SORTING BY DEPTH ==================
@@ -49,6 +48,7 @@ public class QuakeSortInPlace {
 
     public void sortByLargestDepth(ArrayList<QuakeEntry> quakes){
         for (int i=0; i < quakes.size(); i++) {
+//        for (int i=0; i < 50; i++) {
             int minIdx = getLargestDepth(quakes,i);
             QuakeEntry qi = quakes.get(i);
             QuakeEntry qmin = quakes.get(minIdx);
@@ -89,17 +89,56 @@ public class QuakeSortInPlace {
         }
     }
     // ==========   END OF BUBBLE SORT  ===============
+
+    // ==========   CHECK FOR COMPLETION  =============
+    public boolean checkInSortedOrder(ArrayList<QuakeEntry> quakes){
+        for(int i = 0; i < quakes.size()-1; i++){
+            if(quakes.get(i).getMagnitude() > quakes.get(i+1).getMagnitude()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void sortByMagnitudeWithBubbleSortWithCheck(ArrayList<QuakeEntry> in){
+        int numPasses = 0;
+        for(int i = 0; i < in.size()-1; i++){
+            if(!checkInSortedOrder(in)){
+                onePassBubbleSort(in, i);
+                numPasses++;
+            }
+        }
+        System.out.println("Completed in " + numPasses + " passes");
+    }
+
+    public void sortByMagnitudeWithCheck(ArrayList<QuakeEntry> in) {
+        int numPasses = 0;
+        for (int i=0; i< in.size(); i++) {
+            if(!checkInSortedOrder(in)) {
+                int minIdx = getSmallestMagnitude(in, i);
+                QuakeEntry qi = in.get(i);
+                QuakeEntry qmin = in.get(minIdx);
+                in.set(i, qmin);
+                in.set(minIdx, qi);
+                numPasses++;
+            }
+        }
+        System.out.println("Completed in " + numPasses + " passes");
+    }
+
+    // ==========   END OF CHECK FOR COMPLETION =======
     public void testSort() {
         EarthQuakeParser parser = new EarthQuakeParser(); 
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "/Users/mbpro/Downloads/EarthquakeSortStarterProgram/data/earthquakeDataSampleSix2.atom";
+        String source = "/Users/mbpro/Downloads/EarthquakeSortStarterProgram/data/earthQuakeDataDec6sample2.atom";
         //String source = "data/nov20quakedata.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);  
        
         System.out.println("read data for "+list.size()+" quakes");    
 //        sortByMagnitude(list);
 //        sortByLargestDepth(list);
-        sortByMagnitudeWithBubbleSort(list);
+        sortByMagnitudeWithBubbleSortWithCheck(list);
+//        sortByMagnitudeWithCheck(list);
         for (QuakeEntry qe: list) { 
             System.out.println(qe);
         } 

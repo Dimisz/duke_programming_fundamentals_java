@@ -58,16 +58,48 @@ public class QuakeSortInPlace {
     }
     // ==========   END OF SORTING BY DEPTH ===========
 
+    // ==========   BUBBLE SORT  ======================
+    public void onePassBubbleSort(ArrayList<QuakeEntry> quakeData, int numSorted){
+        //visualizing before a pass
+//        System.out.println("\n\nBefore a pass:");
+//        for(QuakeEntry qe : quakeData){
+//            System.out.println(qe);
+//        }
+
+
+        for(int i = 0; i < quakeData.size() - numSorted - 1; i++){
+            QuakeEntry currQuake = quakeData.get(i);
+            QuakeEntry nextQuake = quakeData.get(i+1);
+            if(currQuake.getMagnitude() > nextQuake.getMagnitude()){
+                quakeData.set(i, nextQuake);
+                quakeData.set(i+1, currQuake);
+            }
+        }
+
+        //visualizing before a pass
+//        System.out.println("\n\nAfter a pass:");
+//        for(QuakeEntry qe : quakeData){
+//            System.out.println(qe);
+//        }
+    }
+
+    public void sortByMagnitudeWithBubbleSort(ArrayList<QuakeEntry> in){
+        for(int i = 0; i < in.size() - 1; i++){
+            onePassBubbleSort(in, i);
+        }
+    }
+    // ==========   END OF BUBBLE SORT  ===============
     public void testSort() {
         EarthQuakeParser parser = new EarthQuakeParser(); 
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "/Users/mbpro/Downloads/EarthquakeSortStarterProgram/data/nov20quakedatasmall.atom";
+        String source = "/Users/mbpro/Downloads/EarthquakeSortStarterProgram/data/earthquakeDataSampleSix2.atom";
         //String source = "data/nov20quakedata.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);  
        
         System.out.println("read data for "+list.size()+" quakes");    
 //        sortByMagnitude(list);
-        sortByLargestDepth(list);
+//        sortByLargestDepth(list);
+        sortByMagnitudeWithBubbleSort(list);
         for (QuakeEntry qe: list) { 
             System.out.println(qe);
         } 
@@ -77,7 +109,7 @@ public class QuakeSortInPlace {
     public void createCSV() {
         EarthQuakeParser parser = new EarthQuakeParser();
         //String source = "data/nov20quakedata.atom";
-        String source = "/Users/mbpro/Downloads/EarthquakeSortStarterProgram/data/nov20quakedatasmall.atom";
+        String source = "/Users/mbpro/Downloads/EarthquakeSortStarterProgram/data/earthquakeDataSampleSix2.atom";
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);
         dumpCSV(list);

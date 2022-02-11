@@ -4,7 +4,7 @@ public class DistanceSorter {
     
     public void sortByDistance() {
         EarthQuakeParser parser = new EarthQuakeParser();
-        String source = "data/nov20quakedata.atom";
+        String source = "/Users/mbpro/Downloads/DistanceComparatorDemo/data/nov20quakedata.atom";
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);
         //You know what would be amazing?  If the Location class documented
@@ -15,6 +15,11 @@ public class DistanceSorter {
             System.out.println(qe);
         }
 
+    }
+
+    public static void main(String[] args) {
+        DistanceSorter ds = new DistanceSorter();
+        ds.sortByDistance();
     }
     
 }

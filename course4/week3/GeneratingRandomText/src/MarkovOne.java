@@ -17,7 +17,7 @@ public class MarkovOne {
         myText = s.trim();
     }
 
-    private ArrayList<String> getFollows(String key){
+    public ArrayList<String> getFollows(String key){
         ArrayList<String> follows = new ArrayList<String>();
         int pos = 0;
 
@@ -26,7 +26,7 @@ public class MarkovOne {
             if(start == -1){
                 break;
             }
-            if(start + key.length() >= myText.length()-1){
+            if(start + key.length() > myText.length()-1){
                 break;
             }
             String next = myText.substring(start+key.length(), start+key.length()+1);

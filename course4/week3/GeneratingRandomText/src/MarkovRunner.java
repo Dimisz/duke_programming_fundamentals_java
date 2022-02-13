@@ -17,12 +17,12 @@ public class MarkovRunner {
 		st = st.replace('\n', ' ');
 	//	String st = "This is a test yes a test";
 		MarkovZero markov = new MarkovZero();
-		markov.setRandom(42);
+		markov.setRandom(88);
 		markov.setTraining(st);
-		for(int k=0; k < 3; k++){
+//		for(int k=0; k < 3; k++){
 			String text = markov.getRandomText(500);
 			printOut(text);
-		}
+//		}
 	}
 
 	public void runMarkovOne() {
@@ -31,13 +31,39 @@ public class MarkovRunner {
 		st = st.replace('\n', ' ');
 //		String st = "this is a test yes this is a test.";
 		MarkovOne markov1 = new MarkovOne();
+		markov1.setRandom(273);
 		markov1.setTraining(st);
-		markov1.setRandom(42);
-		markov1.setTraining(st);
-		for(int k=0; k < 3; k++){
+//		for(int k=0; k < 3; k++){
 			String text = markov1.getRandomText(500);
 			printOut(text);
-		}
+//		}
+	}
+
+	public void runMarkovFour() {
+		FileResource fr = new FileResource();
+		String st = fr.asString();
+		st = st.replace('\n', ' ');
+//		String st = "this is a test yes this is a test.";
+		MarkovFour markovFour = new MarkovFour();
+
+		markovFour.setRandom(371);
+		markovFour.setTraining(st);
+//		for(int k=0; k < 3; k++){
+			String text = markovFour.getRandomText(500);
+			printOut(text);
+//		}
+	}
+
+	public void runMarkovModel() {
+		FileResource fr = new FileResource();
+		String st = fr.asString();
+		st = st.replace('\n', ' ');
+		MarkovModel markovModel = new MarkovModel(8);
+
+		markovModel.setRandom(365);
+		markovModel.setTraining(st);
+		String text = markovModel.getRandomText(500);
+		printOut(text);
 	}
 	
 	private void printOut(String s){
@@ -58,6 +84,8 @@ public class MarkovRunner {
 	public static void main(String[] args) {
 		MarkovRunner mr = new MarkovRunner();
 //		mr.runMarkovZero();
-		mr.runMarkovOne();
+//		mr.runMarkovOne();
+//		mr.runMarkovFour();
+		mr.runMarkovModel();
 	}
 }

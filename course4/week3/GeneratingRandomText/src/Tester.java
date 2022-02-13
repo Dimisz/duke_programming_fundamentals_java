@@ -25,7 +25,7 @@ public class Tester {
         st = st.replace('\n', ' ');
         MarkovOne markovOne = new MarkovOne();
         markovOne.setTraining(st);
-        System.out.println(markovOne.getFollows("t").size());
+        System.out.println(markovOne.getFollows("th").size());
     }
 
     public static void main(String[] args) {

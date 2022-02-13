@@ -1,10 +1,13 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
 
-public class MarkovTwo {
+public class MarkovModel {
     private String myText;
     private Random myRandom;
+    private int n;
 
-    public MarkovTwo() {
+    public MarkovModel(int numChars) {
+        n = numChars;
         myRandom = new Random();
     }
 
@@ -25,7 +28,7 @@ public class MarkovTwo {
             if(start == -1){
                 break;
             }
-            if(start + key.length() > myText.length()-1){
+            if(start + key.length() >= myText.length()-1){
                 break;
             }
             String next = myText.substring(start+key.length(), start+key.length()+1);
@@ -37,10 +40,10 @@ public class MarkovTwo {
 
     public String getRandomText(int numChars){
         StringBuilder sb = new StringBuilder();
-        int index = myRandom.nextInt(myText.length()-2);
-        String key = myText.substring(index, index + 2);
+        int index = myRandom.nextInt(myText.length()-n);
+        String key = myText.substring(index, index + n);
         sb.append(key);
-        for(int k=0; k < numChars-2; k++){
+        for(int k=0; k < numChars-n; k++){
             ArrayList<String> follows = getFollows(key);
 //            System.out.println("key " + key + " " + follows);
             if(follows.size() == 0){
@@ -49,7 +52,9 @@ public class MarkovTwo {
             index = myRandom.nextInt(follows.size());
             String next = follows.get(index);
             sb.append(next);
-            key = key.substring(1)+next;
+//            System.out.println("key: " + key.length() + " next: " + next.length());
+            key = key.substring(1) + next;
+
         }
 
         return sb.toString();

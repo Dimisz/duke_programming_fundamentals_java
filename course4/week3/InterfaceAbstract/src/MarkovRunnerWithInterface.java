@@ -40,6 +40,29 @@ public class MarkovRunnerWithInterface {
 
     }
 
+	public void testHashMap(){
+		EfficientMarkovModel efMark2 = new EfficientMarkovModel(2);
+		String text = "yes-this-is-a-thin-pretty-pink-thistle";
+		int size = 50;
+		int seed = 42;
+		runModel(efMark2, text, size, seed);
+//		efMark2.printHashMapInfo();
+	}
+
+	public void compareMethods(){
+		int order = 5;
+		int seed = 615;
+		int size = 1000;
+		FileResource fr = new FileResource();
+		String st = fr.asString();
+		st = st.replace('\n', ' ');
+//		MarkovModel mm = new MarkovModel(order);
+//		runModel(mm, st, size, seed);
+		EfficientMarkovModel efM = new EfficientMarkovModel(order);
+		runModel(efM, st, size, seed);
+
+	}
+
 	private void printOut(String s){
 		String[] words = s.split("\\s+");
 		int psize = 0;
@@ -57,7 +80,9 @@ public class MarkovRunnerWithInterface {
 
 	public static void main(String[] args) {
 		MarkovRunnerWithInterface mRunner = new MarkovRunnerWithInterface();
-		mRunner.runMarkov();
+//		mRunner.runMarkov();
+//		mRunner.testHashMap();
+		mRunner.compareMethods();
 	}
 	
 }

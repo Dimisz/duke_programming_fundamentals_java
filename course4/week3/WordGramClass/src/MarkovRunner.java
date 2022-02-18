@@ -22,18 +22,19 @@ public class MarkovRunner {
         markov.setTraining(text); 
         markov.setRandom(seed);
         System.out.println("running with " + markov); 
-        for(int k=0; k < 3; k++){ 
+//        for(int k=0; k < 3; k++){
             String st = markov.getRandomText(size); 
             printOut(st); 
-        } 
+//        }
     } 
 
     public void runMarkov() { 
         FileResource fr = new FileResource(); 
         String st = fr.asString(); 
-        st = st.replace('\n', ' '); 
-        //MarkovWordOne markovWord = new MarkovWordOne(); 
-        //runModel(markovWord, st, 200); 
+        st = st.replace('\n', ' ');
+        MarkovWord markovWord = new MarkovWord(3);
+
+        runModel(markovWord, st, 200, 643);
     } 
 
     private void printOut(String s){
@@ -49,6 +50,10 @@ public class MarkovRunner {
             } 
         } 
         System.out.println("\n----------------------------------");
-    } 
+    }
 
+    public static void main(String[] args) {
+        MarkovRunner mr = new MarkovRunner();
+        mr.runMarkov();
+    }
 }

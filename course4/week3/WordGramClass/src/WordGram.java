@@ -2,10 +2,20 @@
 public class WordGram {
     private String[] myWords;
     private int myHash;
+    private String myWordsString;
+
+    public int getMyHash(){
+        return myHash;
+    }
+
+    public String getMyWordsString(){
+        return myWordsString;
+    }
 
     public WordGram(String[] source, int start, int size) {
         myWords = new String[size];
         System.arraycopy(source, start, myWords, 0, size);
+        myHash = hashCodeForGram();
     }
 
     public String wordAt(int index) {
@@ -53,6 +63,17 @@ public class WordGram {
         }
         out.myWords[lastIndex] = word;
         return out;
+    }
+
+    private int hashCodeForGram(){
+        StringBuilder sb = new StringBuilder();
+        for(String word : myWords){
+            sb.append(word);
+            sb.append(" ");
+        }
+        String gram = sb.toString().trim();
+        myWordsString = gram;
+        return gram.hashCode();
     }
 
 }

@@ -32,10 +32,30 @@ public class MarkovRunner {
         FileResource fr = new FileResource(); 
         String st = fr.asString(); 
         st = st.replace('\n', ' ');
-        MarkovWord markovWord = new MarkovWord(3);
+        MarkovWord markovWord = new MarkovWord(5);
 
-        runModel(markovWord, st, 200, 643);
-    } 
+        runModel(markovWord, st, 200, 844);
+    }
+
+    public void runEfMarkov() {
+        FileResource fr = new FileResource();
+        String st = fr.asString();
+        st = st.replace('\n', ' ');
+        EfficientMarkovWord markovWord = new EfficientMarkovWord(2);
+
+        runModel(markovWord, st, 200, 65);
+        //markovWord.printHashMapInfo();
+
+    }
+
+    public void testHashMap(){
+        FileResource fr = new FileResource();
+        String st = fr.asString();
+
+        EfficientMarkovWord effMarkov = new EfficientMarkovWord(5);
+//        String st = "this is a test yes this is really a test yes a test this is wow";
+        runModel(effMarkov, st, 50, 531);
+    }
 
     private void printOut(String s){
         String[] words = s.split("\\s+");
@@ -52,8 +72,27 @@ public class MarkovRunner {
         System.out.println("\n----------------------------------");
     }
 
+    public void compareMethods(){
+        FileResource fr = new FileResource();
+        String st = fr.asString();
+        st = st.replace('\n', ' ');
+        System.out.println("Running MarkowWord....");
+        MarkovWord markovWord = new MarkovWord(2);
+        for(int i = 0; i < 3; i++) {
+            runModel(markovWord, st, 100, 42);
+        }
+        System.out.println("Runnning efficient markov...");
+        EfficientMarkovWord efficientMarkovWord = new EfficientMarkovWord(2);
+        for(int i = 0; i < 3; i++) {
+            runModel(efficientMarkovWord, st, 100, 42);
+        }
+    }
+
     public static void main(String[] args) {
         MarkovRunner mr = new MarkovRunner();
-        mr.runMarkov();
+//        mr.runMarkov();
+        mr.testHashMap();
+//        mr.compareMethods();
+//        mr.runEfMarkov();
     }
 }

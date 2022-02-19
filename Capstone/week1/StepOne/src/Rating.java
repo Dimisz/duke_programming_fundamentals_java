@@ -1,7 +1,7 @@
 // An immutable passive data object (PDO) to represent the rating data
 public class Rating implements Comparable<Rating> {
-    private String item;
-    private double value;
+    private String item; //IMDB ID of the movie rated
+    private double value; // Actual rating
 
     public Rating (String anItem, double aValue) {
         item = anItem;

@@ -1,8 +1,10 @@
+import java.io.IOException;
 import java.util.*;
 import org.apache.commons.csv.*;
-import edu.duke.FileResource;
+//import edu.duke.FileResource;
 
 public class MovieDatabase {
+
     private static HashMap<String, Movie> ourMovies;
 
     public static void initialize(String moviefile) {
@@ -15,16 +17,21 @@ public class MovieDatabase {
     private static void initialize() {
         if (ourMovies == null) {
             ourMovies = new HashMap<String,Movie>();
-            loadMovies("data/ratedmoviesfull.csv");
+            loadMovies("/Users/mbpro/Downloads/StepOneStarterProgram/data/ratedmoviesfull.csv");
         }
     }	
 
 	
     private static void loadMovies(String filename) {
-        FirstRatings fr = new FirstRatings();
-        ArrayList<Movie> list = fr.loadMovies(filename);
-        for (Movie m : list) {
-            ourMovies.put(m.getID(), m);
+        try {
+            FirstRatings fr = new FirstRatings();
+            ArrayList<Movie> list = fr.loadMovies(filename);
+            for (Movie m : list) {
+                ourMovies.put(m.getID(), m);
+            }
+        }
+        catch(IOException ioe){
+            System.out.println("Unable to load movies from FirstRatings class");
         }
     }
 

@@ -91,10 +91,60 @@ public class MovieRunnerWithFilters {
         }
     }
 
+
+    public static void printAverageRatingsByDirectors(int minRaters, String directors){
+        String ratersFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratings_short.csv";
+        String moviesFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratedmovies_short.csv";
+
+        ThirdRatings thirdRatings = new ThirdRatings(ratersFilename);
+        System.out.println("Number of raters: " + thirdRatings.getRaterSize());
+
+        MovieDatabase.initialize(moviesFilename);
+        System.out.println("Number of movies: " + MovieDatabase.size());
+
+        Filter directorsFilter = new DirectorsFilter(directors);
+        ArrayList<Rating> ratings = thirdRatings.getAverageRatingsByFilter(minRaters, directorsFilter);
+        Collections.sort(ratings);
+        System.out.println("found " + ratings.size() + " movies");
+        for(Rating rating : ratings){
+            String currentID = rating.getItem();
+            String currentTitle = MovieDatabase.getTitle(currentID);
+            String currentDirectors = MovieDatabase.getDirector(currentID);
+            System.out.println(rating.getValue() + " " + currentTitle + "\n" + currentDirectors);
+        }
+    }
+
+    public static void printAverageRatingsByYearAfterAndGenre(int minRaters, int year, String genre){
+        String ratersFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratings_short.csv";
+        String moviesFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratedmovies_short.csv";
+
+        ThirdRatings thirdRatings = new ThirdRatings(ratersFilename);
+        System.out.println("Number of raters: " + thirdRatings.getRaterSize());
+
+        MovieDatabase.initialize(moviesFilename);
+        System.out.println("Number of movies: " + MovieDatabase.size());
+
+        AllFilters allFilters = new AllFilters();
+        allFilters.addFilter(new YearAfterFilter(year));
+        allFilters.addFilter(new GenreFilter(genre));
+        ArrayList<Rating> ratings = thirdRatings.getAverageRatingsByFilter(minRaters, allFilters);
+        Collections.sort(ratings);
+        System.out.println("found " + ratings.size() + " movies");
+        for(Rating rating : ratings){
+            String currentID = rating.getItem();
+            String currentTitle = MovieDatabase.getTitle(currentID);
+            int currentYear = MovieDatabase.getYear(currentID);
+            String currentGenre = MovieDatabase.getGenres(currentID);
+            System.out.println(rating.getValue() + " " + currentYear + " " +  currentTitle + "\n" + currentGenre);
+        }
+    }
+
     public static void main(String[] args) {
 //        MovieRunnerWithFilters.printAverageRatings(1);
 //        MovieRunnerWithFilters.printAverageRatingsByYear(1,2000);
 //        MovieRunnerWithFilters.printAverageRatingsByGenre(1, "Crime");
-        MovieRunnerWithFilters.printAverageRatingsByMinutes(1, 110, 170);
+//        MovieRunnerWithFilters.printAverageRatingsByMinutes(1, 110, 170);
+//        MovieRunnerWithFilters.printAverageRatingsByDirectors(1, "Charles Chaplin,Michael Mann,Spike Jonze");
+        MovieRunnerWithFilters.printAverageRatingsByYearAfterAndGenre(1, 1980, "Romance");
     }
 }

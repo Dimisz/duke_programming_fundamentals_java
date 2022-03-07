@@ -19,12 +19,13 @@ public class ThirdRatings {
         FirstRatings fr = new FirstRatings();
 
         try {
-            fr.loadRaters(ratingsFilename);
+            myRaters = fr.loadRaters(ratingsFilename);
         }
         catch(IOException ioe){
             System.out.println("Unable to load raters from SecondRatings");
         }
-        myRaters = fr.getRaters();
+
+//        myRaters = fr.getRaters();
     }
 
     private double getAverageByID(String movieID, int minimalRaters){
@@ -60,5 +61,17 @@ public class ThirdRatings {
 
     public int getRaterSize(){
         return myRaters.size();
+    }
+
+    public ArrayList<Rating> getAverageRatingsByFilter(int minimalRaters, Filter filterCriteria){
+        ArrayList<Rating> ratings = new ArrayList<Rating>();
+        ArrayList<String> movies = MovieDatabase.filterBy(filterCriteria);
+        for(String movie : movies){
+            double currentRating = getAverageByID(movie, minimalRaters);
+            if(currentRating > 0.0) {
+                ratings.add(new Rating(movie, currentRating));
+            }
+        }
+        return ratings;
     }
 }

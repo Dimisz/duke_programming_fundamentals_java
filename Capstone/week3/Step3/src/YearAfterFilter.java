@@ -1,4 +1,4 @@
-/*
+
 public class YearAfterFilter implements Filter {
 
 	private int myYear;
@@ -13,4 +13,3 @@ public class YearAfterFilter implements Filter {
 	}
 
 }
-*/

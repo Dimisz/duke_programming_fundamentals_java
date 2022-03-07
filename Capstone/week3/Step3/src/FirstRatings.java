@@ -70,8 +70,10 @@ public class FirstRatings {
             int minutes = Integer.parseInt(record.get("minutes").trim());
             String poster = record.get("poster").trim();
 
-            moviesInfo.add(new Movie(id, title, year, genres, director,
-                country, poster, minutes));
+//            moviesInfo.add(new Movie(id, title, year, genres, director,
+//                country, poster, minutes));
+            loadedMovies.add(new Movie(id, title, year, genres, director,
+                    country, poster, minutes));
         }
 
         return loadedMovies;
@@ -156,7 +158,7 @@ public class FirstRatings {
     - appends the objects to the ArrayList<Movie> moviesInfo
      */
     public ArrayList<Rater> loadRaters(String filename) throws IOException {
-//        ArrayList<Rater> raters = new ArrayList<Rater>();
+        ArrayList<Rater> raters = new ArrayList<Rater>();
         Reader in = new FileReader(filename);
         CSVParser parser = new CSVParser(in, CSVFormat.DEFAULT.withHeader());
         for (CSVRecord record : parser) {
@@ -179,8 +181,8 @@ public class FirstRatings {
                 raters.add(newRater);
             }
         }
-        System.out.println("Inside first raters");
-        System.out.println(raters.size());
+//        System.out.println("Inside first raters");
+//        System.out.println(raters.size());
         return raters;
     }
 

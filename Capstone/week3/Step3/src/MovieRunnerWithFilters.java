@@ -68,9 +68,33 @@ public class MovieRunnerWithFilters {
         }
     }
 
+
+    public static void printAverageRatingsByMinutes(int minRaters, int minMinutes, int maxMinutes){
+        String ratersFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratings_short.csv";
+        String moviesFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratedmovies_short.csv";
+
+        ThirdRatings thirdRatings = new ThirdRatings(ratersFilename);
+        System.out.println("Number of raters: " + thirdRatings.getRaterSize());
+
+        MovieDatabase.initialize(moviesFilename);
+        System.out.println("Number of movies: " + MovieDatabase.size());
+
+        Filter minutesFilter = new MinutesFilter(minMinutes, maxMinutes);
+        ArrayList<Rating> ratings = thirdRatings.getAverageRatingsByFilter(minRaters, minutesFilter);
+        Collections.sort(ratings);
+        System.out.println("found " + ratings.size() + " movies");
+        for(Rating rating : ratings){
+            String currentID = rating.getItem();
+            String currentTitle = MovieDatabase.getTitle(currentID);
+            int currentMinutes = MovieDatabase.getMinutes(currentID);
+            System.out.println(rating.getValue() + " Time: " + currentMinutes + " " + currentTitle);
+        }
+    }
+
     public static void main(String[] args) {
 //        MovieRunnerWithFilters.printAverageRatings(1);
 //        MovieRunnerWithFilters.printAverageRatingsByYear(1,2000);
-        MovieRunnerWithFilters.printAverageRatingsByGenre(1, "Crime");
+//        MovieRunnerWithFilters.printAverageRatingsByGenre(1, "Crime");
+        MovieRunnerWithFilters.printAverageRatingsByMinutes(1, 110, 170);
     }
 }

@@ -178,10 +178,10 @@ public class MovieRunnerSimilarRatings {
 
     public static void main(String[] args) {
 //        printAverageRatings(5);
-//        printSimilarRatings("65", 20, 5);
-//        printSimilarRatingsByGenre("Action","65", 20, 5);
-//        printSimilarRatingsByDirector("Clint Eastwood,Sydney Pollack,David Cronenberg,Oliver Stone","1034", 10, 3);
-//        printSimilarRatingsByGenreAndMinutes("Adventure", 100, 200, "65", 10, 5);
-//        printSimilarRatingsByYearAfterAndMinutes(2000, 80, 100, "65",10, 5);
+//        printSimilarRatings("71", 20, 5);
+//        printSimilarRatingsByGenre("Mystery","964", 20, 5);
+//        printSimilarRatingsByDirector("Clint Eastwood,J.J. Abrams,Alfred Hitchcock,Sydney Pollack,David Cronenberg,Oliver Stone,Mike Leigh","120", 10, 2);
+//        printSimilarRatingsByGenreAndMinutes("Drama", 80, 160, "168", 10, 3);
+        printSimilarRatingsByYearAfterAndMinutes(1975, 70, 200, "314",10, 5);
     }
 }

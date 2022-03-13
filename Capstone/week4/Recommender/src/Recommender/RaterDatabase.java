@@ -23,7 +23,7 @@ public class RaterDatabase {
             ourRaters= new HashMap<String,Rater>();
 
             addRatings(filename);
-            System.out.println("Failed to add ratings");
+            System.out.println("Added ratings");
         }
     }
 

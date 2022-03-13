@@ -2,6 +2,7 @@ package Recommender;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FourthRatings {
 
@@ -72,12 +73,92 @@ public class FourthRatings {
             for(Rater rater : raters){
                 String raterId = rater.getID();
                 if(!raterId.equals(id)){
-                    Rating currentSimilarity = new Rating(raterId, dotProduct(me, rater));
-                    similarities.add(currentSimilarity);
+                    double similarity = dotProduct(me, rater);
+                    if(similarity > 0) {
+                        Rating currentSimilarity = new Rating(raterId, similarity);
+                        similarities.add(currentSimilarity);
+                    }
                 }
             }
+            Collections.sort(similarities, Collections.reverseOrder());
             return similarities;
         }
+
+
+
+public ArrayList<Rating> getSimilarRatings(String id, int numSimilarRaters, int minimalRaters) {
+
+    ArrayList<Rating> result = new ArrayList<Rating>();
+    ArrayList<Rating> raters = getSimilarities(id);
+
+    //Iterates over all Movie IDs of movies in MovieDatabase
+    for(String movie : MovieDatabase.filterBy(new TrueFilter())) {
+        double totalWeightedRating = 0.0;
+        int numTopRaters = 0;
+        //Iterates over the top numSimilarRaters ratings in raters
+        for(int i = 0 ; i < numSimilarRaters ; i ++) {
+            //Stores the rating at index i
+            Rating raterSimilarityRating = raters.get(i);
+            //Stores the Rater whose rating is at index i
+            Rater rater = RaterDatabase.getRater(raterSimilarityRating.getItem());
+
+            if(RaterDatabase.getRater(id).hasRating(movie)) continue;
+            //If rater has rated movie with id movie then his weightd rating is added to
+            //totalWightedRating and numTopRaters is incremented.
+            if(rater.hasRating(movie)) {
+                totalWeightedRating += (rater.getRating(movie) ) * raterSimilarityRating.getValue();
+                numTopRaters ++;
+            }
+        }
+        //If numSimilarRaters or more topRaters have rated the movie, it is
+        //added to result.
+        if(numTopRaters >= minimalRaters) {
+            result.add(new Rating(movie, totalWeightedRating/numTopRaters));
+        }
+    }
+    Collections.sort(result, Collections.reverseOrder());
+    //System.out.println(result);
+    return result;
+}
+
+
+    public ArrayList<Rating> getSimilarRatingsByFilter(String id, int numSimilarRaters, int minimalRaters, Filter filterCriteria){
+
+        ArrayList<Rating> result = new ArrayList<Rating>();
+        ArrayList<Rating> raters = getSimilarities(id);
+
+        //Iterates over all Movie IDs of movies in MovieDatabase
+        for(String movie : MovieDatabase.filterBy(filterCriteria)) {
+            double totalWeightedRating = 0.0;
+            int numTopRaters = 0;
+            //Iterates over the top numSimilarRaters ratings in raters
+            for(int i = 0 ; i < numSimilarRaters ; i ++) {
+                //Stores the rating at index i
+                Rating raterSimilarityRating = raters.get(i);
+                //Stores the Rater whose rating is at index i
+                Rater rater = RaterDatabase.getRater(raterSimilarityRating.getItem());
+
+                if(RaterDatabase.getRater(id).hasRating(movie)) continue;
+                //If rater has rated movie with id movie then his weightd rating is added to
+                //totalWightedRating and numTopRaters is incremented.
+                if(rater.hasRating(movie)) {
+                    totalWeightedRating += (rater.getRating(movie) ) * raterSimilarityRating.getValue();
+                    numTopRaters ++;
+                }
+            }
+            //If numSimilarRaters or more topRaters have rated the movie, it is
+            //added to result.
+            if(numTopRaters >= minimalRaters) {
+                result.add(new Rating(movie, totalWeightedRating/numTopRaters));
+            }
+        }
+        Collections.sort(result, Collections.reverseOrder());
+        //System.out.println(result);
+        return result;
+    }
+
+
+
 
 
 }

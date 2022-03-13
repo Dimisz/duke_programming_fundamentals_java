@@ -1,5 +1,6 @@
 package Recommender;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -53,8 +54,79 @@ public class MovieRunnerSimilarRatings {
         }
     }
 
+    public static void printSimilarRatings(String raterId, int numSimilarRaters, int minimalRaters){
+        String ratersFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratings.csv";
+        String moviesFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratedmoviesfull.csv";
+
+        FourthRatings fourthRatings = new FourthRatings();
+
+        MovieDatabase.initialize(moviesFilename);
+        System.out.println("Number of movies: " + MovieDatabase.size());
+
+        RaterDatabase.initialize(ratersFilename);
+        System.out.println("Number of ratings: " + RaterDatabase.size());
+
+        ArrayList<Rating> similarRatings = fourthRatings.getSimilarRatings(raterId, numSimilarRaters, minimalRaters);
+        for(Rating rating : similarRatings){
+            String movieId = rating.getItem();
+            String movieTitle = MovieDatabase.getTitle(movieId);
+            System.out.println(movieTitle + " : " + rating.getValue());
+            break;
+        }
+
+    }
+
+    public static void printSimilarRatingsByGenre(String genre, String raterId, int numSimilarRaters, int minimalRaters){
+        String ratersFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratings.csv";
+        String moviesFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratedmoviesfull.csv";
+
+        FourthRatings fourthRatings = new FourthRatings();
+
+        MovieDatabase.initialize(moviesFilename);
+        System.out.println("Number of movies: " + MovieDatabase.size());
+
+        RaterDatabase.initialize(ratersFilename);
+        System.out.println("Number of ratings: " + RaterDatabase.size());
+
+        ArrayList<Rating> similarRatings = fourthRatings.getSimilarRatingsByFilter(raterId, numSimilarRaters, minimalRaters, new GenreFilter(genre));
+        for(Rating rating : similarRatings){
+            String movieId = rating.getItem();
+            String movieTitle = MovieDatabase.getTitle(movieId);
+            System.out.println(movieTitle + " : " + rating.getValue());
+            break;
+        }
+
+    }
+
+
+    public static void printSimilarRatingsByDirector(String director, String raterId, int numSimilarRaters, int minimalRaters){
+        String ratersFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratings.csv";
+        String moviesFilename = "/Users/mbpro/Downloads/StepOneStarterProgram/data/ratedmoviesfull.csv";
+
+        FourthRatings fourthRatings = new FourthRatings();
+
+        MovieDatabase.initialize(moviesFilename);
+        System.out.println("Number of movies: " + MovieDatabase.size());
+
+        RaterDatabase.initialize(ratersFilename);
+        System.out.println("Number of ratings: " + RaterDatabase.size());
+
+        ArrayList<Rating> similarRatings = fourthRatings.getSimilarRatingsByFilter(raterId, numSimilarRaters, minimalRaters, new DirectorsFilter(director));
+        for(Rating rating : similarRatings){
+            String movieId = rating.getItem();
+            String movieTitle = MovieDatabase.getTitle(movieId);
+            System.out.println(movieTitle + " : " + rating.getValue());
+            break;
+        }
+
+    }
+
 
     public static void main(String[] args) {
-        printAverageRatings(5);
+//        printAverageRatings(5);
+//        printSimilarRatings("65", 20, 5);
+//        printSimilarRatingsByGenre("Action","65", 20, 5);
+        printSimilarRatingsByDirector("Clint Eastwood,Sydney Pollack,David Cronenberg,Oliver Stone","1034", 10, 3);
+
     }
 }

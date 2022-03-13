@@ -1,14 +1,10 @@
 package Recommender;
 
-
-/**
- * Write a description of RaterDatabase here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-
 import edu.duke.*;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.*;
 import org.apache.commons.csv.*;
 
@@ -25,24 +21,33 @@ public class RaterDatabase {
     public static void initialize(String filename) {
         if (ourRaters == null) {
             ourRaters= new HashMap<String,Rater>();
-            addRatings("data/" + filename);
+
+            addRatings(filename);
+            System.out.println("Failed to add ratings");
         }
     }
 
     public static void addRatings(String filename) {
-        initialize();
-        FileResource fr = new FileResource(filename);
-        CSVParser csvp = fr.getCSVParser();
-        for(CSVRecord rec : csvp) {
-            String id = rec.get("rater_id");
-            String item = rec.get("movie_id");
-            String rating = rec.get("rating");
-            addRaterRating(id,item,Double.parseDouble(rating));
+        try {
+            initialize();
+            Reader in = new FileReader(filename);
+            CSVParser parser = new CSVParser(in, CSVFormat.DEFAULT.withHeader());
+            FileResource fr = new FileResource(filename);
+            CSVParser csvp = fr.getCSVParser();
+            for (CSVRecord rec : csvp) {
+                String id = rec.get("rater_id");
+                String item = rec.get("movie_id");
+                String rating = rec.get("rating");
+                addRaterRating(id, item, Double.parseDouble(rating));
+            }
+        }
+        catch(IOException ie){
+            System.out.println("Unable to read the file within addRatings");
         }
     }
 
     public static void addRaterRating(String raterID, String movieID, double rating) {
-        initialize();
+        //initialize();
         Rater rater =  null;
         if (ourRaters.containsKey(raterID)) {
             rater = ourRaters.get(raterID);
@@ -55,13 +60,13 @@ public class RaterDatabase {
     }
 
     public static Rater getRater(String id) {
-        initialize();
+        //initialize();
 
         return ourRaters.get(id);
     }
 
     public static ArrayList<Rater> getRaters() {
-        initialize();
+        //initialize();
         ArrayList<Rater> list = new ArrayList<Rater>(ourRaters.values());
 
         return list;
